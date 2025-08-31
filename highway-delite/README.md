@@ -1,337 +1,340 @@
-# Highway Delite - Full-Stack Note-Taking App
+# 🚀 Highway Delite - Full-Stack Note-Taking Application
 
-A production-ready note-taking application with email+OTP and Google OAuth authentication, built with React, TypeScript, Node.js, and MongoDB.
+A modern, production-ready note-taking application with email+OTP authentication and Google OAuth2 integration.
 
-## 🚀 Features
+## ✨ Features
 
-- **Dual Authentication**: Email+OTP and Google OAuth
-- **Secure OTP System**: Hashed OTPs with expiry and attempt limits
-- **JWT Authentication**: Secure token-based authentication
-- **Notes CRUD**: Create, read, and delete notes
-- **Responsive Design**: Mobile-first design with Tailwind CSS
-- **Type Safety**: Full TypeScript implementation
-- **Real-time Feedback**: Toast notifications and loading states
-- **Error Handling**: Comprehensive error handling and validation
+### 🔐 Authentication
+- **Email + OTP Verification**: Secure signup/login with email verification
+- **Google OAuth2**: One-click authentication with Google accounts
+- **JWT Tokens**: Secure session management with HTTP-only cookies
+- **Passwordless**: No passwords to remember or manage
 
-## 🏗️ Architecture
+### 📝 Notes Management
+- **CRUD Operations**: Create, read, update, and delete notes
+- **Real-time Updates**: Instant UI updates with TanStack Query
+- **User-specific**: Each user sees only their own notes
+- **Rich Text Support**: Full text editing capabilities
 
-### Tech Stack
+### 🎨 User Experience
+- **Modern UI**: Clean, responsive design with Tailwind CSS
+- **Mobile Responsive**: Works perfectly on all devices
+- **Loading States**: Smooth loading animations and skeleton screens
+- **Toast Notifications**: User-friendly feedback messages
+- **Date of Birth**: Optional user profile information
 
-**Frontend:**
-- React 19 + TypeScript
-- Vite for build tooling
-- Tailwind CSS for styling
-- React Router for navigation
-- TanStack Query for data fetching
-- React Hot Toast for notifications
-- Lucide React for icons
+### 🛡️ Security
+- **Rate Limiting**: Protection against brute force attacks
+- **Input Validation**: Zod schema validation for all requests
+- **CORS Configuration**: Proper cross-origin resource sharing
+- **Error Handling**: Comprehensive error management
 
-**Backend:**
-- Node.js + TypeScript
-- Express.js framework
-- MongoDB with Mongoose ODM
-- JWT for authentication
-- bcryptjs for password hashing
-- Zod for validation
-- Google OAuth2 integration
+## 🛠️ Tech Stack
 
-**Database:**
-- MongoDB (chosen for flexibility with document-based data and easy scaling)
+### Frontend
+- **React 19** - Modern UI library
+- **TypeScript** - Type-safe development
+- **Vite** - Fast build tool and dev server
+- **Tailwind CSS** - Utility-first CSS framework
+- **React Router** - Client-side routing
+- **TanStack Query** - Server state management
+- **React Hot Toast** - Toast notifications
+- **Lucide React** - Beautiful icons
+- **Axios** - HTTP client
 
-### Project Structure
+### Backend
+- **Node.js** - JavaScript runtime
+- **TypeScript** - Type-safe development
+- **Express.js** - Web framework
+- **MongoDB** - NoSQL database
+- **Mongoose** - MongoDB object modeling
+- **JWT** - JSON Web Tokens
+- **bcryptjs** - Password hashing
+- **Zod** - Schema validation
+- **Google OAuth2** - Social authentication
+- **Nodemailer** - Email sending (stubbed for dev)
+
+### Development Tools
+- **ESLint** - Code linting
+- **Prettier** - Code formatting
+- **Jest** - Testing framework
+- **tsx** - TypeScript execution
+
+## 📁 Project Structure
 
 ```
 highway-delite/
-├── src/                    # Frontend source
-│   ├── components/         # Reusable components
-│   ├── contexts/          # React contexts
-│   ├── lib/               # Utilities and API client
+├── src/                    # Frontend source code
+│   ├── components/         # Reusable UI components
+│   ├── contexts/          # React contexts (Auth)
+│   ├── lib/               # Utility libraries
 │   ├── pages/             # Page components
-│   └── App.tsx            # Main app component
-├── server/                # Backend source
-│   ├── config/            # Database configuration
-│   ├── middleware/        # Express middleware
-│   ├── models/            # Mongoose models
-│   ├── routes/            # API routes
-│   ├── utils/             # Utility functions
-│   └── index.ts           # Server entry point
-└── README.md
+│   └── assets/            # Static assets
+├── server/                # Backend source code
+│   ├── src/
+│   │   ├── config/        # Configuration files
+│   │   ├── controllers/   # Route controllers
+│   │   ├── middleware/    # Express middleware
+│   │   ├── models/        # Mongoose models
+│   │   ├── routes/        # API routes
+│   │   └── utils/         # Utility functions
+│   └── package.json
+├── public/                # Public assets
+└── package.json           # Frontend dependencies
 ```
 
-## 🛠️ Local Setup
+## 🚀 Quick Start
 
 ### Prerequisites
+- **Node.js** (v18 or higher)
+- **npm** or **yarn**
+- **MongoDB** (local or MongoDB Atlas)
 
-- Node.js 18+ 
-- MongoDB (local or Atlas)
-- Google OAuth credentials (optional for development)
-
-### Installation
-
-1. **Clone the repository**
-   ```bash
-   git clone <repository-url>
-   cd highway-delite
-   ```
-
-2. **Install frontend dependencies**
-   ```bash
-   npm install
-   ```
-
-3. **Install backend dependencies**
-   ```bash
-   cd server
-   npm install
-   cd ..
-   ```
-
-4. **Environment Configuration**
-
-   Create `.env` file in the server directory:
-   ```env
-   # Server Configuration
-   PORT=5000
-   NODE_ENV=development
-
-   # Database
-   DATABASE_URL=mongodb://localhost:27017/highway-delite
-
-   # JWT Configuration
-   JWT_SECRET=your-super-secret-jwt-key-change-in-production
-   JWT_EXPIRES_IN=7d
-
-   # OTP Configuration
-   OTP_EXP_MINUTES=10
-   OTP_MAX_ATTEMPTS=5
-
-   # Google OAuth (optional for development)
-   GOOGLE_CLIENT_ID=your-google-client-id
-   GOOGLE_CLIENT_SECRET=your-google-client-secret
-   OAUTH_REDIRECT_URL=http://localhost:5000/api/auth/google/callback
-
-   # CORS
-   CORS_ORIGIN=http://localhost:5173
-   ```
-
-   Create `.env` file in the root directory:
-   ```env
-   VITE_API_BASE_URL=http://localhost:5000/api
-   VITE_GOOGLE_CLIENT_ID=your-google-client-id
-   ```
-
-5. **Start MongoDB**
-   ```bash
-   # If using local MongoDB
-   mongod
-   
-   # Or use MongoDB Atlas (cloud)
-   ```
-
-6. **Run the application**
-
-   **Option 1: Run both frontend and backend separately**
-   ```bash
-   # Terminal 1 - Backend
-   cd server
-   npm run dev
-   
-   # Terminal 2 - Frontend
-   npm run dev
-   ```
-
-   **Option 2: Run both together**
-   ```bash
-   npm run dev:full
-   ```
-
-7. **Access the application**
-   - Frontend: http://localhost:5173
-   - Backend API: http://localhost:5000/api
-   - Health check: http://localhost:5000/api/health
-
-## 🔐 Authentication Flow
-
-### Email + OTP Flow
-
-1. **Sign Up:**
-   - User enters email and name
-   - System creates inactive user
-   - Generates 6-digit OTP and sends via email
-   - OTP is hashed and stored with expiry
-
-2. **OTP Verification:**
-   - User enters 6-digit OTP
-   - System verifies OTP and activates user
-   - Issues JWT token for authentication
-
-3. **Login:**
-   - User enters email
-   - System sends new OTP
-   - Same verification process as signup
-
-### Google OAuth Flow
-
-1. **OAuth Start:**
-   - User clicks "Continue with Google"
-   - Opens Google OAuth popup
-   - Redirects to Google consent screen
-
-2. **OAuth Callback:**
-   - Google redirects with authorization code
-   - Server exchanges code for user info
-   - Creates/updates user and issues JWT
-   - Closes popup and sends data to parent window
-
-## 📡 API Endpoints
-
-### Authentication
-- `POST /auth/signup-email` - Create account with email
-- `POST /auth/verify-otp` - Verify OTP and activate account
-- `POST /auth/login-email` - Send OTP for login
-- `POST /auth/google/start` - Start Google OAuth flow
-- `GET /auth/google/callback` - Handle Google OAuth callback
-- `POST /auth/logout` - Logout user
-
-### User
-- `GET /user/me` - Get current user info
-
-### Notes
-- `GET /notes` - Get user's notes
-- `POST /notes` - Create new note
-- `DELETE /notes/:id` - Delete note
-
-## 🔒 Security Features
-
-- **OTP Security:**
-  - 6-digit numeric OTPs
-  - bcrypt hashing with salt rounds
-  - 10-minute expiry (configurable)
-  - Maximum 5 attempts (configurable)
-  - Automatic cleanup of expired OTPs
-
-- **JWT Security:**
-  - HTTP-only cookies (preferred)
-  - Authorization headers (fallback)
-  - Configurable expiry (7 days default)
-  - Secure token verification
-
-- **Input Validation:**
-  - Zod schema validation
-  - Email format validation
-  - OTP length validation
-  - Rate limiting on API endpoints
-
-- **CORS Configuration:**
-  - Origin-specific CORS
-  - Credentials support
-  - Secure cookie settings
-
-## 🚀 Deployment
-
-### Backend Deployment (Render/Railway/Fly.io)
-
-1. **Build the application**
-   ```bash
-   cd server
-   npm run build
-   ```
-
-2. **Set environment variables** in your deployment platform:
-   - `DATABASE_URL` (MongoDB Atlas connection string)
-   - `JWT_SECRET` (strong random string)
-   - `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET`
-   - `CORS_ORIGIN` (your frontend URL)
-   - `OAUTH_REDIRECT_URL` (your backend URL + callback path)
-
-3. **Deploy** using your preferred platform
-
-### Frontend Deployment (Vercel/Netlify)
-
-1. **Build the application**
-   ```bash
-   npm run build
-   ```
-
-2. **Set environment variables:**
-   - `VITE_API_BASE_URL` (your backend API URL)
-   - `VITE_GOOGLE_CLIENT_ID` (your Google OAuth client ID)
-
-3. **Deploy** using your preferred platform
-
-### Database Setup
-
-**MongoDB Atlas (Recommended):**
-1. Create MongoDB Atlas account
-2. Create new cluster
-3. Get connection string
-4. Add IP whitelist or use 0.0.0.0/0 for all IPs
-5. Update `DATABASE_URL` in environment variables
-
-## 🧪 Testing
-
-### Unit Tests
+### 1. Clone the Repository
 ```bash
-cd server
-npm test
+git clone https://github.com/meenajii2004/HighWay--Delite
+cd highway-delite
 ```
 
-### Manual Testing Checklist
+### 2. Install Dependencies
 
-**Authentication:**
-- [ ] Email signup flow
-- [ ] OTP verification
-- [ ] Email login flow
-- [ ] Google OAuth flow
-- [ ] Logout functionality
+#### Frontend Dependencies
+```bash
+npm install
+```
 
-**Notes:**
-- [ ] Create note
-- [ ] List notes
-- [ ] Delete note
-- [ ] Authorization (users can only see their notes)
+#### Backend Dependencies
+```bash
+cd server
+npm install
+cd ..
+```
 
-**Error Handling:**
-- [ ] Invalid email format
-- [ ] Wrong OTP
-- [ ] Expired OTP
-- [ ] Network errors
-- [ ] Duplicate accounts
+### 3. Environment Setup
+
+#### Frontend Environment (.env)
+Create `highway-delite/.env`:
+```env
+VITE_API_BASE_URL=http://localhost:5000/api
+```
+
+#### Backend Environment (.env)
+Create `highway-delite/server/.env`:
+```env
+# Server Configuration
+PORT=5000
+NODE_ENV=development
+
+# Database
+MONGODB_URI=mongodb_url
+# Or for MongoDB Atlas:
+# MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/
+
+# JWT
+JWT_SECRET=your-super-secret-jwt-key-here
+JWT_EXPIRES_IN=7d
+
+# Google OAuth2
+GOOGLE_CLIENT_ID=your-google-client-id
+GOOGLE_CLIENT_SECRET=your-google-client-secret
+OAUTH_REDIRECT_URL=http://localhost:5000/api/auth/google/callback
+
+# CORS
+CORS_ORIGIN=http://localhost:5173
+
+# OTP Configuration
+OTP_EXPIRY_MINUTES=10
+OTP_MAX_ATTEMPTS=5
+
+# Email (stubbed for development)
+EMAIL_FROM=noreply@highwaydelite.com
+EMAIL_HOST=smtp.gmail.com
+EMAIL_PORT=587
+EMAIL_USER=your-email@gmail.com
+EMAIL_PASS=your-app-password
+```
+
+### 4. Start the Application
+
+#### Option A: Start Both Servers (Recommended)
+```bash
+npm run dev:full
+```
+
+#### Option B: Start Servers Separately
+
+**Terminal 1 - Backend:**
+```bash
+cd server
+npm run dev
+```
+
+**Terminal 2 - Frontend:**
+```bash
+npm run dev
+```
+
+### 5. Access the Application
+- **Frontend**: http://localhost:5173
+- **Backend API**: http://localhost:5000/api
+- **Health Check**: http://localhost:5000/api/health
 
 ## 🔧 Development
 
 ### Available Scripts
 
-**Frontend:**
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run preview` - Preview production build
-- `npm run lint` - Run ESLint
+#### Frontend Scripts
+```bash
+npm run dev          # Start frontend dev server
+npm run build        # Build for production
+npm run preview      # Preview production build
+npm run lint         # Run ESLint
+```
 
-**Backend:**
-- `npm run dev` - Start development server with hot reload
-- `npm run build` - Build TypeScript
-- `npm run start` - Start production server
-- `npm run lint` - Run ESLint
+#### Backend Scripts
+```bash
+cd server
+npm run dev          # Start backend dev server
+npm run build        # Build for production
+npm run start        # Start production server
+npm run test         # Run tests
+```
 
-**Both:**
-- `npm run dev:full` - Start both frontend and backend
+#### Full Stack Scripts
+```bash
+npm run dev:full     # Start both frontend and backend
+npm run build:full   # Build both frontend and backend
+```
 
-### Code Quality
+### Database Setup
 
-- **TypeScript**: Strict mode enabled
-- **ESLint**: Code linting and formatting
-- **Prettier**: Code formatting
-- **Zod**: Runtime type validation
-- **Error Boundaries**: React error handling
+#### Local MongoDB
+1. Install MongoDB locally
+2. Start MongoDB service
+3. Create database: `highway-delite`
 
-## 📱 Mobile Responsiveness
+#### MongoDB Atlas (Cloud)
+1. Create MongoDB Atlas account
+2. Create a cluster
+3. Get connection string
+4. Update `MONGODB_URI` in `.env`
 
-The application is fully responsive with:
-- Mobile-first design approach
-- Tailwind CSS responsive utilities
-- Touch-friendly interactions
-- Optimized layouts for all screen sizes
+### Google OAuth2 Setup
+
+1. Go to [Google Cloud Console](https://console.cloud.google.com/)
+2. Create a new project or select existing
+3. Enable Google+ API
+4. Create OAuth 2.0 credentials
+5. Add authorized redirect URIs:
+   - `http://localhost:5000/api/auth/google/callback`
+6. Update environment variables with client ID and secret
+
+## 📱 Usage
+
+### Authentication Flow
+
+#### Email + OTP Signup
+1. Navigate to `/signup`
+2. Enter name, email, and optional date of birth
+3. Click "Get OTP"
+4. Check email for 6-digit code
+5. Enter OTP and verify
+6. Account created successfully!
+
+#### Email + OTP Login
+1. Navigate to `/login`
+2. Enter email address
+3. Click "Get OTP"
+4. Check email for 6-digit code
+5. Enter OTP and sign in
+6. Welcome to your dashboard!
+
+#### Google OAuth
+1. Click "Google" button on signup/login page
+2. Authorize with Google account
+3. Automatically signed in!
+
+### Notes Management
+
+#### Create Note
+1. Click "Create Note" button
+2. Enter title and content
+3. Click "Create" to save
+
+#### Edit Note
+1. Click edit icon on any note
+2. Modify title or content
+3. Click "Save Changes"
+
+#### Delete Note
+1. Click delete icon on any note
+2. Confirm deletion
+
+## 🚀 Deployment
+
+### Frontend Deployment (Vercel/Netlify)
+
+#### Vercel
+```bash
+npm run build
+vercel --prod
+```
+
+#### Netlify
+```bash
+npm run build
+# Upload dist/ folder to Netlify
+```
+
+### Backend Deployment (Render/Railway/Fly.io)
+
+#### Render
+1. Connect GitHub repository
+2. Set environment variables
+3. Deploy automatically
+
+#### Railway
+1. Connect GitHub repository
+2. Set environment variables
+3. Deploy automatically
+
+### Database Deployment (MongoDB Atlas)
+1. Create MongoDB Atlas cluster
+2. Get connection string
+3. Update `MONGODB_URI` in production environment
+
+### Environment Variables for Production
+```env
+NODE_ENV=production
+MONGODB_URI=your-production-mongodb-uri
+JWT_SECRET=your-production-jwt-secret
+CORS_ORIGIN=https://your-frontend-domain.com
+GOOGLE_CLIENT_ID=your-google-client-id
+GOOGLE_CLIENT_SECRET=your-google-client-secret
+OAUTH_REDIRECT_URL=https://your-backend-domain.com/api/auth/google/callback
+```
+
+## 🧪 Testing
+
+### Backend Tests
+```bash
+cd server
+npm run test
+```
+
+### Frontend Tests
+```bash
+npm run test
+```
+
+## 🔒 Security Features
+
+- **JWT Authentication**: Secure token-based authentication
+- **HTTP-only Cookies**: XSS protection
+- **Rate Limiting**: Brute force protection
+- **Input Validation**: Zod schema validation
+- **CORS Configuration**: Proper cross-origin handling
+- **Error Handling**: No sensitive data exposure
 
 ## 🤝 Contributing
 
@@ -347,11 +350,27 @@ This project is licensed under the MIT License.
 
 ## 🆘 Support
 
-For support and questions:
-- Create an issue in the repository
-- Check the documentation
-- Review the API endpoints
+If you encounter any issues:
+
+1. Check the console for error messages
+2. Verify environment variables are set correctly
+3. Ensure MongoDB is running
+4. Check network connectivity
+5. Review the logs for detailed error information
+
+## 🎯 Roadmap
+
+- [ ] Real-time collaboration
+- [ ] Rich text editor
+- [ ] File attachments
+- [ ] Note sharing
+- [ ] Mobile app
+- [ ] Dark mode
+- [ ] Note categories/tags
+- [ ] Search functionality
+- [ ] Export/import notes
 
 ---
 
-**Note:** This is a production-ready application with security best practices implemented. Make sure to change default secrets and configure proper environment variables before deployment.
+**Built with ❤️ using modern web technologies**
+contact :- meenaharsh909@gmail.com
