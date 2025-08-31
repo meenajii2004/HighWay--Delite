@@ -373,6 +373,6 @@ If you encounter any issues:
 ---
 
 **Built with ❤️ using modern web technologies**
-contact :- meenaharsh909@gmail.com
+- contact :- meenaharsh909@gmail.com
 
 
