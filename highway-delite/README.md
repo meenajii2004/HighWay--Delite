@@ -368,7 +368,7 @@ If you encounter any issues:
 - [ ] Dark mode
 - [ ] Note categories/tags
 - [ ] Search functionality
-- [ ] Export/import notes
+- [ ] Export/import notes 
 
 ---
 
